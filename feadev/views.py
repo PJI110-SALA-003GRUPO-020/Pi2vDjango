@@ -3,25 +3,15 @@ from django.core.mail import send_mail
 from django.shortcuts import render
 from .forms import ContatoForm
 from django.views.decorators.csrf import csrf_protect
-from .models import Membro, Categoria, Subcategoria, Gestão
+from .models import Membro, Categoria, Subcategoria
 
 
 def index(request):
     return render(request, 'index.html')
 
 
-
-
 def estrutura_view(request):
-    gestões = Gestão.objects.all()
-    contexto = {'gestões': gestões}
-    return render(request, 'estrutura.html', contexto)
-
-
-
-
-
-
+    return render(request, 'estrutura.html')
 
 
 def trajetoria_view(request):
@@ -50,6 +40,7 @@ def membro_change_list_view(request):
     }
 
     return render(request, 'membro_change_list.html', contexto)
+
 
 def atividades_view(request):
     return render(request, 'atividades.html')
@@ -100,22 +91,17 @@ def contato_view(request):
         form = ContatoForm(request.POST)
         if form.is_valid():
             form.save()
-
-            # Recupere os dados do formulário
             nome = form.cleaned_data['nome']
             email = form.cleaned_data['email']
             mensagem = form.cleaned_data['mensagem']
-
-            # Crie uma mensagem de e-mail com base nos dados do formulário
             email_subject = f'Novo contato de {nome}'
             email_message = f'Mensagem de {email}:\n\n{mensagem}'
 
-            # Envie o e-mail usando as configurações padrão de envio de e-mail do Django
             send_mail(
                 email_subject,
                 email_message,
-                settings.DEFAULT_FROM_EMAIL,  # Remetente padrão configurado em settings.py
-                [settings.EMAIL_HOST_USER],  # Endereço de e-mail do remetente configurado em settings.py
+                settings.DEFAULT_FROM_EMAIL, 
+                [settings.EMAIL_HOST_USER],  
             )
 
             return render(request, 'index.html')

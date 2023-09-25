@@ -64,17 +64,3 @@ class Membro(models.Model):
 
 
 
-
-class Gestão(models.Model):
-    nome = models.CharField(max_length=255)
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True, blank=True)
-    imagem = models.ImageField(upload_to='membros', null=True, blank=True)
-    linkedin = models.URLField(max_length=200, blank=True, null=True)
-    github = models.URLField(max_length=200, blank=True, null=True)
-
-    def __str__(self):
-        return self.nome
-
-
-
-

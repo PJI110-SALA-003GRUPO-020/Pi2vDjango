@@ -1,6 +1,6 @@
 from django.contrib import admin
 admin.site.site_header = 'Administração do site'
-from .models import Contato, Membro, Categoria, Subcategoria, Gestão
+from .models import Contato, Membro, Categoria, Subcategoria
 from django.utils.html import format_html
 
 
@@ -19,6 +19,9 @@ class MembroAdmin(admin.ModelAdmin):
     list_display = ['nome', 'categoria', 'sub_categoria', 'status', 'imagem_thumbnail']
     search_fields = ['nome']
 
+
+
+
     def ativar_membros(self, request, queryset):
         queryset.update(ativo=True)
         request.session['ativo'] = True
@@ -31,6 +34,7 @@ class MembroAdmin(admin.ModelAdmin):
         return format_html('<img src="{}" width="40" height="40" />', obj.imagem.url)
 
     imagem_thumbnail.short_description = 'Imagem'
+
 
     
 
@@ -48,21 +52,5 @@ admin.site.register(Membro, MembroAdmin)
 
 
 
-
-class GestãoAdmin(admin.ModelAdmin):
-    list_filter = ['nome', 'categoria']
-    list_display = ['nome', 'categoria', 'linkedin', 'github', 'imagem_thumbnail']
-    search_fields = ['nome']
-    def imagem_thumbnail(self, obj):
-        return format_html('<img src="{}" width="40" height="40" />', obj.imagem.url)
-
-    imagem_thumbnail.short_description = 'Imagem'
-
-admin.site.register(Gestão, GestãoAdmin)
-
-
-
-
-
-admin.site.register(Categoria)
+admin.site.register(Categoria)   
 admin.site.register(Subcategoria)
