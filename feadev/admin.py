@@ -15,12 +15,8 @@ admin.site.add_action('mark_as_unread', 'Marcar como não lido')
 
 class MembroAdmin(admin.ModelAdmin):
     actions = ['ativar_membros', 'desativar_membros']
-    list_filter = ['categoria', 'sub_categoria', 'ativo', 'inativo','ano']
+    list_filter = ['categoria',  'sub_categoria', 'ativo', 'inativo','ano']
     list_display = ['nome', 'categoria', 'sub_categoria', 'status', 'imagem_thumbnail']
-    search_fields = ['nome']
-
-
-
 
     def ativar_membros(self, request, queryset):
         queryset.update(ativo=True)
@@ -31,8 +27,10 @@ class MembroAdmin(admin.ModelAdmin):
         request.session['inativo'] = False
 
     def imagem_thumbnail(self, obj):
-        return format_html('<img src="{}" width="40" height="40" />', obj.imagem.url)
-
+        if obj.imagem:
+            return format_html('<img src="{}" width="40" height="40" />', obj.imagem.url)
+        else:
+            return ''
     imagem_thumbnail.short_description = 'Imagem'
 
 
@@ -52,5 +50,17 @@ admin.site.register(Membro, MembroAdmin)
 
 
 
-admin.site.register(Categoria)   
+
+class CategoriaAdmin(admin.ModelAdmin):
+    list_display = ('categoria', 'nova_categoria')
+    
+admin.site.register(Categoria)
+
+
+
+
+
+class SubcategoriaAdmin(admin.ModelAdmin):
+    list_display = ('sub_categoria', 'nova_subcategoria')
+
 admin.site.register(Subcategoria)
