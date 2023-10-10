@@ -101,9 +101,11 @@ DATABASES = {
         "PASSWORD": config('PASSWORD'), # MySQL password
         "HOST": config('HOST'),  # MySQL server hostname (usually "localhost")
         "PORT": "3306",  # MySQL server port (default is 3306)
+        "OPTIONS": {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
-
 
 
 
