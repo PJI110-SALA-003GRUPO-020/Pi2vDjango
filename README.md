@@ -47,4 +47,11 @@ python manage.py runserver
 <br><strong> OBSERVAÇÕES IMPORTANTES </strong><br><br>
 
 Tem Scripts no 'HTML'  é desta forma mesmo.
-Não modifique.
+Não modifique.<br><br>
+
+
+É necessário instalar MySQL no seu computador para rodar o projeto e também fazer as configurações necessárias no arquivo <strong> settings.py </strong> para conectar o banco de dados com o projeto localmente (localhost) pois as configurações atuais estão com credenciais pessoais para  conectar na nuvem AWS.
+
+Este tutorial explica como instalar o MySQL no Windows e fazer as configurações necessárias no arquivo <strong> settings.py </strong> para conectar o MySQL ao projeto localmente (localhost)<br><br>
+https://www.youtube.com/watch?v=ZGGiBGTv9do
+
