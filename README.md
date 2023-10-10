@@ -55,3 +55,10 @@ Não modifique.<br><br>
 Este tutorial explica como instalar o MySQL no Windows e fazer as configurações necessárias no arquivo <strong> settings.py </strong> para conectar o MySQL ao projeto localmente (localhost)<br><br>
 https://www.youtube.com/watch?v=ZGGiBGTv9do
 
+<br><br>
+
+Local onde fazer as configurações no arquivo <strong> settings.py </strong> <br><br>
+
+![](feadev/static/pictures/bd_localhost.png)
+
+
