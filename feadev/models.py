@@ -31,12 +31,18 @@ class Categoria(models.Model):
             return self.categoria
         else:
             return self.nova_categoria
+
+    def save(self, *args, **kwargs):
+        if self.nova_categoria and not self.categoria:
+            self.categoria = self.nova_categoria
+        super(Categoria, self).save(*args, **kwargs)    
         
     class Meta:
         verbose_name_plural = "Categorias"
 
         
         
+
 
 
 
@@ -49,10 +55,9 @@ SUBCATEGORIA_CHOICES = (
     ('FinQuant', 'FinQuant'),
     ('Marketing', 'Marketing'),
     ('The Office', 'The Office'),
-    ('Contagem', 'Contagem'),
+    ('Contagramação', 'Contagramação'),
     ('Machine Learning', 'Machine Learning'),    
 )
-
 
 class Subcategoria(models.Model):
     sub_categoria = models.CharField(max_length=255, choices=SUBCATEGORIA_CHOICES, blank=True, null=True, verbose_name="Subcategoria")
@@ -64,8 +69,14 @@ class Subcategoria(models.Model):
         else:
             return self.nova_subcategoria
         
+    def save(self, *args, **kwargs):
+        if self.nova_subcategoria and not self.sub_categoria:
+            self.sub_categoria = self.nova_subcategoria
+        super(Subcategoria, self).save(*args, **kwargs)
+        
     class Meta:
         verbose_name_plural = "Subcategorias"
+
 
 
 
